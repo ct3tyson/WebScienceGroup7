@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>Sign-Up for Bktlstr</title>
+  
+  <link href="css/browseStyles.css" rel="stylesheet">
+
+    <!-- Bootstrap Core CSS -->
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Custom CSS -->
+
+    <link href="bucketlist.css" rel="stylesheet">
+    <!-- Custom Fonts -->
+    <link href="font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+    <link href="http://fonts.googleapis.com/css?family=Lato:300,400,700,300italic,400italic,700italic" rel="stylesheet" type="text/css">
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.5/angular.min.js"></script>
+    <script src="/socket.io/socket.io.js"></script>
+
+</head>
+
+<body ng-app="app">
+
+ <nav class="navbar navbar-default navbar-fixed-top topnav" role="navigation">
+        <div class="container topnav">
+            <!-- Brand and toggle get grouped for better mobile display -->
+            <div class="navbar-header">
+                
+                <a class="navbar-brand topnav" href="index.html">Home</a>
+                
+            </div>
+            <!-- Collect the nav links, forms, and other content for toggling -->
+            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                <ul class="navbar navbar-brand topnav navbar-nav navbar-right">
+                    <li >
+                        <a href="browse2.html" >Browse  &nbsp  &nbsp  &nbsp  &nbsp</a>
+                    
+                    
+                        <a href="bucketlisttest.html">My Bucket List &nbsp  &nbsp  &nbsp  &nbsp</a>
+                    
+                    
+                        <a href="profile.html">My Profile &nbsp  &nbsp  &nbsp  &nbsp</a>
+                    
+                    
+                        <a href="about.html">About</a>
+                    </li>
+                </ul>
+            </div>
+            <!-- /.navbar-collapse -->
+        </div>
+        <!-- /.container -->
+    </nav>
+    <br><br><br>
+    <h2 id="title"> Create Your Bucket List <h2>
+      <hr class="intro-divider">
+
+    <div class="containers " ng-controller="BucketListController" >
+      <h2 id="bucketList"> Bucket List</h2>
+      <p>
+        <label for="new-task">Add Item</label><input name= "itemName" id="new-task" type="text" ng-required><br><button type="button" class="btn btn-success" ng-click="addItem()"><span class="glyphicon glyphicon-plus"></button>
+      </p>
+      
+      <h3 id="todo">Todo</h3>
+      <div class="incomplete-tasks" >
+        <ul ng-repeat="item in items | filter:{complete:false}">
+          <li> 
+            <span> {{item.name}} </span>
+            <button type="button" class="btn btn-danger" ng-click="removeItem(item.name)"><span class="glyphicon glyphicon-remove"></button>
+                
+                <button type="button" class="btn btn-success" ng-click="editItem(item)">
+                <span class="glyphicon glyphicon-ok"></span>
+                </button>
+				<button type="button" class="btn" ng-click="makePublic(item)">Make Public</button>
+          </li>
+      </ul>
+      
+      <h3  ng-style="myObj" id="complete">Completed</h3>
+      <div class="completed-tasks" > 
+        <ul ng-repeat="item in items | filter:{complete:true}">
+          <li> 
+            
+            <span> {{item.name}} </span>
+            <button type="button" class="btn btn-danger" ng-click="removeItem(item.name)"><span class="glyphicon glyphicon-remove"></button>
+
+            <button type="button" class="btn btn-warning" ng-click="editItem(item)"><span class="glyphicon glyphicon-repeat"></button>
+			<button type="button" class="btn" ng-click="makePublic(item)">Make Public</button>
+          </li>
+      </ul>
+        
+
+    </div>
+	</div>
+
+    <script type="text/javascript" src="js/bucketlist.js"></script>
+
+  </body>
+</html>
+
+
+
+

@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>Sign-Up for Bktlstr</title>
+  
+  <link href="css/browseStyles.css" rel="stylesheet">
+
+    <!-- Bootstrap Core CSS -->
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Custom CSS -->
+
+    <link href="bucketlist.css" rel="stylesheet">
+    <!-- Custom Fonts -->
+    <link href="font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+    <link href="http://fonts.googleapis.com/css?family=Lato:300,400,700,300italic,400italic,700italic" rel="stylesheet" type="text/css">
+    <script type="text/javascript" ng:autobind src="http://code.angularjs.org/0.9.16/angular-0.9.16.js"></script>
+
+</head>
+
+<body>
+
+ <nav class="navbar navbar-default navbar-fixed-top topnav" role="navigation">
+        <div class="container topnav">
+            <!-- Brand and toggle get grouped for better mobile display -->
+            <div class="navbar-header">
+                
+                <a class="navbar-brand topnav" href="index.html">Home</a>
+                <a class="navbar-brand topnav" href="">Explore</a>
+            </div>
+            <!-- Collect the nav links, forms, and other content for toggling -->
+            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                <ul class="nav navbar-nav navbar-right">
+                    <li >
+                        <a href="browse.html">Browse</a>
+                    
+                    
+                        <a href="signup.html">Sign-Up</a>
+                    
+                    
+                        <a href="login.html">Login</a>
+                    
+                    
+                        <a href="about.html">About</a>
+                    </li>
+                </ul>
+            </div>
+            <!-- /.navbar-collapse -->
+        </div>
+        <!-- /.container -->
+    </nav>
+    <br><br><br>
+    <h2 id="title"> Create Your Bucket List <h2>
+      <hr class="intro-divider">
+
+    <div class="containers " ng:controller="BucketListController" >
+      <h2 id="bucketList"> Bucket List</h2>
+      <p>
+        <label for="new-task">Add Item</label><input name= "itemName" id="new-task" type="text" ng:reqired><button ng:click="addItem()">Add</button>
+      </p>
+      
+      <h3 id="todo">Todo</h3>
+      <div class="incomplete-tasks" >
+        <ul ng:repeat="item in items.$filter({done: false})">
+          <li> 
+            <span> {{item.name}} </span>
+            <button ng:click="items.$remove(item)">Delete</button>
+                <button ng:click="item.done = true">Done</button>
+          </li>
+      </ul>
+      
+      <h3 id="complete">Completed</h3>
+      <div class="completed-tasks" ng:show="items.$filter({done: true}).length > 0"> 
+        <ul ng:repeat="item in items.$filter({done: true})">
+          <li> 
+            
+            <span> {{item.name}} </span>
+            <button ng:click="items.$remove(item)">Delete</button>
+            <button ng:click="item.done = false">Not Done</button>
+          </li>
+      </ul>
+        
+
+    </div>
+
+    <script type="text/javascript" src="js/app.js"></script>
+
+  </body>
+</html>
+
+
+<script>
+function BucketListController() {
+  this.items = [{
+    name: "Travel the World",
+    done: false},
+    {
+    name: "Fly in a spaceship",
+    done: true},
+
+    {
+      name: "Buy a Tesla",
+      done: true}];
+}
+
+ BucketListController.prototype = {
+  addItem: function() {
+    if (this.itemName ==="") {
+      return false;
+    }
+    this.items.push({
+      name: this.itemName,
+      done: false
+    });
+    this.itemName = '';
+  }
+};
+</script>
+
+

@@ -1,0 +1,36 @@
+<!doctype html>
+<html ng-app='app'>
+  <head>
+    <title>My Angular App</title>
+    
+  </head>
+  <body>
+	<!-- Container for bootstrap adjustment and angular app -->
+    <ul class="container tweetFeed" ng-controller='controller'>
+		<p>{{user}}</p>
+      
+	</ul>
+
+	   
+	
+  </body>
+ 
+ <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.5/angular.min.js"></script>
+	
+	
+  <script>
+	//start app
+angular.module('app',[]).controller('controller', function($scope, $http) {
+	$http({
+		method: 'GET',
+		url: 'http://localhost:3000/user'
+	}).then(function successCallback(response) {
+		console.log(response);
+		$scope.user = response.data;
+	}, function errorCallback(response) {
+		console.log(response);
+	});
+	
+});
+  </script>
+</html>

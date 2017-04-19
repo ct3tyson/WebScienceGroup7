@@ -1,0 +1,211 @@
+﻿<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+    <meta name="description" content="" />
+    <meta name="author" content="" />
+    <!--[if IE]>
+        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+        <![endif]-->
+    <title>Bootstrap User Profile Template </title>
+    <!-- BOOTSTRAP STYLE SHEET -->
+    <link href="assets/css/bootstrap.css" rel="stylesheet" />
+     <!-- FONT AWESOME ICONS STYLE SHEET -->
+    <link href="assets/css/font-awesome.css" rel="stylesheet" />
+    <link href="http://fonts.googleapis.com/css?family=Lato:300,400,700,300italic,400italic,700italic" rel="stylesheet" type="text/css">
+    <!-- CUSTOM STYLES -->
+     <link href="assets/css/style.css" rel="stylesheet" />
+</head>
+<body >
+    <nav class="navbar navbar-default navbar-fixed-top topnav" role="navigation">
+        <div class="container topnav">
+            <!-- Brand and toggle get grouped for better mobile display -->
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand topnav" href="home.html">Home</a>
+                <a class="navbar-brand topnav" href="">Explore</a>
+            </div>
+            <!-- Collect the nav links, forms, and other content for toggling -->
+            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                <ul class="nav navbar-nav navbar-right">
+                    <li>
+                        <a href="browse.html">Browse</a>
+                    </li>
+                    <li>
+                        <a href="bucketlistest.html">Create</a>
+                    </li>
+                    <li>
+                        <a href="profile.html">My Profile</a>
+                    </li>
+                    <li>
+                        <a href="about.html">About</a>
+                    </li>
+                </ul>
+            </div>
+            <!-- /.navbar-collapse -->
+        </div>
+        <!-- /.container -->
+    </nav>
+    <!-- NAVBAR CODE END -->
+    <div class="container">
+
+
+
+          <br>
+          <br>
+          <br>
+          <br>
+    
+         <!-- USER PROFILE ROW STARTS-->
+            <div class="row">
+                    <h1 align = "center">Edit Profile</h1>
+                    <hr class="intro-divider">
+                <div class="col-md-3 col-sm-3">
+
+                                       
+                    <div class="user-wrapper">
+
+                        <img id="img-responsive" src="http://www.anfocal.ie/wp-content/uploads/2013/02/1A-Main-photo-facebook-blank-face-blank.jpeg" class="img-responsive"  alt="your image" height="42" width="42" />
+                        <input type='file' /> 
+                    <div class="description">
+                       <h4 id="myName"> Your Name</h4>
+                       <div id="edit1">
+                      Edit Name: <input type="text" id="theText1" size="10"/>
+                      
+                    </div>
+                        <h5 id= "occ"> <strong> Your Occupation </strong></h5>
+                        <div id="edit2">
+                    Edit Occupation: <input type="text" id="theText2" size="10"/>
+                      
+                    </div>
+                        <p id="info">
+                            You can find me Netflix and Chilling
+                        </p>
+                        <div id="edit3">
+                      Edit Info: <input type="text" id="theText3" size="10"/>
+                      
+                    </div>
+                        <hr />
+                        <button id="editProfile"> <i class="fa fa-user-plus" ></i> &nbsp;Edit Profile </button> 
+                    </div>
+                     </div>
+                </div>
+                
+                <div class="col-md-9 col-sm-9  user-wrapper">
+                    <div class="description">
+                         <h3> Your Biography : </h3>
+                    <hr />
+                     <p id="p1">
+                          Have you ever dreamed of flying freely through outer space,
+                          surrounded by a sea of stars? Mae Jemison fulfilled that dream.
+                          On September 12, 1992, aboard the spaceship Endeavour, she
+                          became the first African-American woman to blast into outer
+                          space.
+                         </p>
+                      <div id="edit4">
+                      Edit This Paragraph:<br> <textarea type="text" id="theText4" cols="60" rows="5"/> </textarea><br>
+                      
+                    </div>
+
+
+
+                    <p id="p2">
+                        Jemison was born on October 17, 1956, in Decatur, Alabama,
+                        but she grew up in Chicago, Illinois. There weren’t many wellknown
+                        African-American female role models while Jemison was
+                        growing up, but she didn’t let that stop her from achieving her
+                        goals. She was especially interested in anthropology, archaeology
+                        and astronomy. 
+                        </p>   
+
+                        <div id="edit5" >
+                      Edit This Paragraph:<br> <textarea type="text" id="theText5" cols="60" rows="5"/> </textarea><br>
+                      <input type="button" id="btn" value="Update" />
+                    </div>
+
+                    <h3> Social Links: </h3>
+                    <hr />                
+                   <a href="#" class="btn btn-social btn-facebook">
+                            <i class="fa fa-facebook"></i>&nbsp; Facebook </a>
+
+                        <a href="#" class="btn btn-social btn-google">
+                            <i class="fa fa-google-plus"></i>&nbsp; Google</a>
+                        <a href="#" class="btn btn-social btn-twitter">
+                            <i class="fa fa-twitter"></i>&nbsp; Twitter </a>
+                        <a href="#" class="btn btn-social btn-linkedin">
+                            <i class="fa fa-linkedin"></i>&nbsp; Linkedin </a>
+                    </div>
+                 
+                </div>
+            </div>
+           <!-- USER PROFILE ROW END-->
+    </div>
+    <!-- CONATINER END -->
+    <!-- REQUIRED SCRIPTS FILES -->
+    <!-- CORE JQUERY FILE -->
+    <script src="assets/js/jquery-1.11.1.js"></script>
+    <!-- REQUIRED BOOTSTRAP SCRIPTS -->
+    <script src="assets/js/bootstrap.js"></script>
+</body>
+<script>
+$(document).ready(function(){
+    $("#editProfile").click(function(){
+        $("#edit1").toggle();
+        $("#edit2").toggle();
+        $("#edit3").toggle();
+        $("#edit4").toggle();
+        $("#edit5").toggle();
+
+
+    });
+
+});
+
+var p1 = document.getElementById('p1');
+var p2= document.getElementById('p2');
+var edit1= document.getElementById('edit1');
+var edit2= document.getElementById('edit2');
+var edit3= document.getElementById('edit3');
+var btn = document.getElementById('btn');
+var txt1 = document.getElementById('theText1');
+var txt2 = document.getElementById('theText2');
+var txt3 = document.getElementById('theText3');
+var txt4 = document.getElementById('theText4');
+var txt5 = document.getElementById('theText5');
+btn.onclick = function(){
+    myName.textContent = txt1.value;
+    occ.textContent = txt2.value;
+    info.textContent = txt3.value;
+    p1.textContent = txt4.value;
+    p2.textContent = txt5.value;
+    
+    $("#edit1").toggle(500);
+    $("#edit2").toggle(500);
+    $("#edit3").toggle(500);
+    $("#edit4").toggle(500);
+    $("#edit5").toggle(500);
+};
+
+</script>
+<script>
+$(function () {
+    $(":file").change(function () {
+        if (this.files && this.files[0]) {
+            var reader = new FileReader();
+            reader.onload = imageIsLoaded;
+            reader.readAsDataURL(this.files[0]);
+        }
+    });
+});
+
+function imageIsLoaded(e) {
+    $('#img-responsive').attr('src',e.target.result);
+  };
+</script>
+</html>
+

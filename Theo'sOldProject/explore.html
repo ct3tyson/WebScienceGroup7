@@ -1,0 +1,280 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>Sign-Up for Bktlstr</title>
+	
+	<link href="css/browseStyles.css" rel="stylesheet">
+
+    <!-- Bootstrap Core CSS -->
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Custom CSS -->
+    <link href="css/landing-page.css" rel="stylesheet">
+
+    <!-- Custom Fonts -->
+    <link href="font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+    <link href="http://fonts.googleapis.com/css?family=Lato:300,400,700,300italic,400italic,700italic" rel="stylesheet" type="text/css">
+
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.8/jquery.min.js"></script>
+
+<script src="http://listjs.com/no-cdn/list.js"></script>
+
+
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
+</head>
+
+<body>
+
+    <!-- Navigation -->
+    <nav class="navbar navbar-default navbar-fixed-top topnav" role="navigation">
+        <div class="container topnav">
+            <!-- Brand and toggle get grouped for better mobile display -->
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand topnav" href="index.html">Home</a>
+                <a class="navbar-brand topnav" href="#">Explore</a>
+            </div>
+            <!-- Collect the nav links, forms, and other content for toggling -->
+            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                <ul class="nav navbar-nav navbar-right">
+                    <li>
+                        <a href="browse.html">Browse</a>
+                    </li>
+                    <li>
+                        <a href="signup.html">Sign-Up</a>
+                    </li>
+                    <li>
+                        <a href="login.html">Login</a>
+                    </li>
+                </ul>
+            </div>
+            <!-- /.navbar-collapse -->
+        </div>
+        <!-- /.container -->
+    </nav>
+
+<br> <br> <br>
+
+<div id="contacts">
+  <table>
+    <thead>
+      <tr>
+        <th class="sort" data-sort="name">#</th>
+        <th class="sort" data-sort="age">Item</th>
+ 
+        <th colspan="2">
+          <input type="text" class="search" placeholder="Search List" />
+        </th>
+      </tr>
+    </thead>
+    <tbody class="list">
+      <tr>
+        <td class="id">1</td>
+
+        <td class="city">I think its lit</td>
+        <td class="edit"><button class="edit-item-btn">Edit</button></td>
+        <td class="remove"><button class="remove-item-btn">Remove</button></td>
+      </tr>
+    </tbody>
+  </table>
+  <table>
+
+
+    <td class="city">
+      <input type="text" id="city-field" placeholder="...." />
+    </td>
+    <td class="add">
+      <button id="add-btn">Add</button>
+      <button id="edit-btn">Edit</button>
+    </td>
+  </table>
+
+</div>
+
+
+
+    <!-- jQuery -->
+    <script src="js/jquery.js"></script>
+
+    <!-- Bootstrap Core JavaScript -->
+    <script src="js/bootstrap.min.js"></script>
+
+<script>
+var options = {
+  valueNames: [ 'id', 'name', 'age', 'city' ]
+};
+
+// Init list
+var contactList = new List('contacts', options);
+
+var idField = $('#id-field'),
+    nameField = $('#name-field'),
+    ageField = $('#age-field'),
+    cityField = $('#city-field'),
+    addBtn = $('#add-btn'),
+    editBtn = $('#edit-btn').hide(),
+    removeBtns = $('.remove-item-btn'),
+    editBtns = $('.edit-item-btn');
+
+// Sets callbacks to the buttons in the list
+refreshCallbacks();
+var x=1;
+var y;
+var z = 1;
+
+addBtn.click(function() {
+    y=z;
+    x = x+y;
+  contactList.add({
+    id: x,
+    name: nameField.val(),
+    age: ageField.val(),
+    city: cityField.val()
+  });
+  clearFields();
+  refreshCallbacks();
+  y=-2;
+});
+
+editBtn.click(function() {
+  var item = contactList.get('id', idField.val())[0];
+  item.values({
+    id:x,
+    name: nameField.val(),
+    age: ageField.val(),
+    city: cityField.val()
+  });
+  clearFields();
+  editBtn.hide();
+  addBtn.show();
+});
+
+function refreshCallbacks() {
+  // Needed to add new buttons to jQuery-extended object
+  removeBtns = $(removeBtns.selector);
+  editBtns = $(editBtns.selector);
+  
+  removeBtns.click(function() {
+    var itemId = $(this).closest('tr').find('.id').text();
+    contactList.remove('id', itemId);
+  });
+  
+  editBtns.click(function() {
+    var itemId = $(this).closest('tr').find('.id').text();
+    var itemValues = contactList.get('id', itemId)[0].values();
+    idField.val(itemValues.id);
+    nameField.val(itemValues.name);
+    ageField.val(itemValues.age);
+    cityField.val(itemValues.city);
+    
+    editBtn.show();
+    addBtn.hide();
+  });
+}
+
+function clearFields() {
+  idField.val('');
+  nameField.val('');
+  ageField.val('');
+  cityField.val('');
+}
+</script>
+<style>
+
+table td, table th {
+  padding:5px;
+}
+
+body {
+  background-color: #3e94ec;
+  font-family:sans-serif;
+  font-size: 16px;
+  font-weight: 400;
+  text-rendering: optimizeLegibility;
+}
+table {
+  background: white;
+  border-radius:3px;
+  border-collapse: collapse;
+  height: 20px;
+  margin: auto;
+  max-width: 600px;
+  padding:5px;
+  width: 100%;
+  box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
+  animation: float 5s infinite;
+}
+
+
+/*** Table Styles **/
+ 
+th {
+  color:#D5DDE5;;
+  background:#1b1e24;
+  border-bottom:4px solid #9ea7af;
+  border-right: 1px solid #343a45;
+  font-size:23px;
+  font-weight: 100;
+  padding:24px;
+  text-align:left;
+  text-shadow: 0 1px 1px rgba(0, 0, 0, 0.1);
+  vertical-align:middle;
+}
+
+th:first-child {
+  border-top-left-radius:3px;
+}
+ 
+th:last-child {
+  border-top-right-radius:3px;
+  border-right:none;
+}
+  
+tr {
+  border-top: 1px solid #C1C3D1;
+  border-bottom-: 1px solid #C1C3D1;
+  color:#666B85;
+  font-size:16px;
+  font-weight:normal;
+  text-shadow: 0 1px 1px rgba(256, 256, 256, 0.1);
+}
+ 
+
+td {
+  background:#FFFFFF;
+  padding:20px;
+  text-align:left;
+  vertical-align:middle;
+  font-weight:300;
+  font-size:18px;
+  text-shadow: -1px -1px 1px rgba(0, 0, 0, 0.1);
+  border-right: 1px solid #C1C3D1;
+}
+
+
+
+</style>
+
+</body>
+
+</html>

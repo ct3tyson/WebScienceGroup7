@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>Sign-Up for Bktlstr</title>
+	
+	<link href="css/browseStyles.css" rel="stylesheet">
+
+    <!-- Bootstrap Core CSS -->
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Custom CSS -->
+    <link href="css/landing-page.css" rel="stylesheet">
+
+    <!-- Custom Fonts -->
+    <link href="font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+    <link href="http://fonts.googleapis.com/css?family=Lato:300,400,700,300italic,400italic,700italic" rel="stylesheet" type="text/css">
+
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
+</head>
+
+<body ng-app="app">
+
+    <!-- Navigation -->
+    <nav class="navbar navbar-default navbar-fixed-top topnav" role="navigation">
+        <div class="container topnav">
+            <!-- Brand and toggle get grouped for better mobile display -->
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand topnav" href="loggedin.html">Home</a>
+                
+            </div>
+            <!-- Collect the nav links, forms, and other content for toggling -->
+            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                <ul class="nav navbar-nav navbar-right">
+                    <li>
+                        <a href="browse2.html">Browse</a>
+                    </li>
+                    <li>
+                        <a href="mybucketlist.html">My Bucketlist</a>
+                    </li>
+                    <li>
+                        <a href="profile.html">My Profile</a>
+                    </li>
+                    <li>
+                        <a href="about2.html">About</a>
+                    </li>
+                    <li>
+                        <a href="http://localhost:3000/logout">Log Out</a>
+                    </li>
+                </ul>
+            </div>
+            <!-- /.navbar-collapse -->
+        </div>
+        <!-- /.container -->
+    </nav>
+
+
+    <!-- Header -->
+    <div class="top" ng-controller="profile">
+        <div class="container">
+
+            <div class="row">
+                <div>
+                    
+                    <h1>Profile</h1>
+                    <hr class="intro-divider">        
+   
+   
+
+				<div class="col-sm-4"></div>
+
+			<div class="panel panel-default">
+            <div class="panel-heading">
+              <h3 class="panel-title">{{user}}'s Profile</h3>
+            </div>
+            <div class="panel-body">
+              <div class="row">
+                
+                <div class="col-md-3 col-lg-3 " align="center"> <img alt="User Pic" src="http://es.fanscup.com/assets/img/interface/empty_user.png" id="img-responsive" class="img-circle img-responsive" width="100" height="100"> </div>
+                <input type='file' /> 
+                <div class=" col-md-9 col-lg-9 "> 
+                  <table class="table table-user-information">
+                    <tbody>
+                      <tr>
+                        <td>First Name:</td>
+                        <td><input type="text" ng-value="firstname" id="firstname"></td>
+                      </tr>
+						
+					  <tr>
+                        <td>Last Name:</td>
+                        <td><input type="text" ng-value="lastname" id="lastname"></td>
+                      </tr>
+						
+                      <tr>
+                        <td>Email:</td>
+                        <td><input type="text" ng-value="email" id="email"></td>
+                      </tr>
+                      <tr>
+                        <td>Country:</td>
+                        <td><input type="text" ng-value="country" id="country"></td>
+                      </tr>
+					  <tr>
+                        <td>State:</td>
+                        <td><input type="text" ng-value="state" id="state"></td>
+                      </tr>
+					  <tr>
+                        <td>Zip:</td>
+                        <td><input type="text" ng-value="zip" id="zip"></td>
+                      </tr>
+                     
+                    </tbody>
+                  </table>
+                  <br><br>
+                  <button class="btn btn-primary btn-block" ng-click="editProfile()">Update</button>
+                </div>
+              </div>
+            </div>  
+                   
+            </div>
+		<div class="panel panel-default">
+            <div class="panel-heading">
+              <h3 class="panel-title">Edit Password</h3>
+            </div>
+            <div class="panel-body">
+              <div class="row">
+                
+                <div class=" col-md-9 col-lg-9 "> 
+                  <table class="table table-user-information">
+                    <tbody>
+					  <tr>{{error}}</tr>
+					  <tr>
+                        <td>Old Password:</td>
+                        <td><input type="password" id="opassword"></td>
+                      </tr>
+                      <tr>
+                        <td>Password:</td>
+                        <td><input type="password" id="password"></td>
+                      </tr>
+						
+					  <tr>
+                        <td>Confirm Password:</td>
+                        <td><input type="password" id="cpassword"></td>
+                      </tr>
+						
+                      
+                     
+                    </tbody>
+                  </table>
+                  <br><br>
+                  <button class="btn btn-primary btn-block" ng-click="changePass()">Change Password</button>
+                </div>
+              </div>
+            </div>  
+                   
+            </div>
+
+		</div>
+		</div>
+          
+        </div>
+		
+    </div>
+
+	
+  
+    <!-- /.banner -->
+
+    <!-- Footer -->
+<!--
+    <footer>
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12">
+                    <ul class="list-inline">
+                        <li>
+                            <a href="#">Home</a>
+                        </li>
+                        <li class="footer-menu-divider">&sdot;</li>
+                        <li>
+                            <a href="#about">About</a>
+                        </li>
+                        <li class="footer-menu-divider">&sdot;</li>
+                        <li>
+                            <a href="#services">Services</a>
+                        </li>
+                        <li class="footer-menu-divider">&sdot;</li>
+                        <li>
+                            <a href="#contact">Contact</a>
+                        </li>
+                    </ul>
+                    <p class="copyright text-muted small">Copyright &copy; Your Company 2014. All Rights Reserved</p>
+                </div>
+            </div>
+        </div>
+    </footer>
+-->
+
+<style>
+    body{
+    
+    }
+    .centered-form{
+        margin-top: 30px;
+    }
+
+    .centered-form .panel{
+        background: rgba(255, 255, 255, 0.8);
+        box-shadow: rgba(0, 0, 0, 0.3) 20px 20px 20px;
+    }
+</style>
+    <!-- jQuery -->
+    <script src="js/jquery.js"></script>
+	<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.5/angular.min.js"></script>
+	<script src="socket.io/socket.io.js"></script>
+    <!-- Bootstrap Core JavaScript -->
+    <script src="js/bootstrap.min.js"></script>
+	
+	<script src="js/editProfile.js"></script>
+	
+	<script>
+$(function () {
+    $(":file").change(function () {
+        if (this.files && this.files[0]) {
+            var reader = new FileReader();
+            reader.onload = imageIsLoaded;
+            reader.readAsDataURL(this.files[0]);
+        }
+    });
+});
+
+function imageIsLoaded(e) {
+    $('#img-responsive').attr('src',e.target.result);
+  };
+</script>
+	
+
+</body>
+
+</html>

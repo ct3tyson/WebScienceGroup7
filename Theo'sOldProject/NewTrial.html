@@ -1,0 +1,113 @@
+<script type="text/javascript" ng:autobind src="http://code.angularjs.org/0.9.16/angular-0.9.16.js"></script>
+
+<div ng:controller="TodosController">
+    <input type="text" name="todoName" size="30" placeholder="Enter your todo here" ng:required />
+    estimation:
+
+    <button ng:click="addTodo()">Add</button>
+    
+    <div class="tasks" ng:show="todos.$filter({done: false}).length > 0">
+        <b>Tasks to do:</b>
+        <ul ng:repeat="todo in todos.$filter({done: false})">
+            <li>
+                <div ng:controller="TodoEditorController">
+                    <button ng:click="todos.$remove(todo)">Delete</button>
+                    <button ng:click="todo.done = true">Done</button>
+                    
+                    <span >
+                        <b>{{todo.name}}</b> ({{todo.estimate}})
+                    </span>
+                    
+                    
+                </div>
+                
+            </li>
+        </ul>
+
+    </div>
+    
+    <div class="tasks" ng:show="todos.$filter({done: true}).length > 0">
+        <b>Done tasks:</b>
+        <ul ng:repeat="todo in todos.$filter({done: true})">
+            <li>
+                
+                <span class="todo done"><b>{{todo.name}}</b> ({{todo.estimate}})</span>
+                <button ng:click="todos.$remove(todo)">Delete</button>
+                <button ng:click="todo.done = false">Not done</button>
+                
+            </li>
+        </ul>
+
+    </div>
+
+    
+    <hr />
+    Debug view:
+    <pre>
+        todos = {{todos}}
+    </pre>
+</div>
+
+<script> 
+function TodosController() {
+    this.estimates = [0, 1, 2, 3, 5, 8];
+
+    this.todos = [{
+        name: "Learn angular",
+        estimate: 8,
+        done: true},
+    {
+        name: "Install java",
+        estimate: 2,
+        done: false},
+    {
+        name: 'Uninstall ruby',
+        estimate: 3,
+        done: false}];
+}
+
+TodosController.prototype = {
+    addTodo: function() {
+        if (this.todoName === "") {
+            return false;
+        }
+
+        this.todos.push({
+            name: this.todoName,
+            estimate: this.todoEstimate,
+            done: false
+        });
+
+        this.todoName = '';
+        this.todoEstimate = 0;
+    }
+};
+
+function TodoEditorController() {
+    this.editorEnabled = false;
+}
+
+TodoEditorController.prototype = {
+    enableEditor: function() {
+        this.editorEnabled = true;
+
+        this.todoName = this.todo.name;
+        this.todoEstimate = this.todo.estimate;
+    },
+
+    disableEditor: function() {
+        this.editorEnabled = false;
+    },
+
+    save: function() {
+        if (this.todoName === "") {
+            return false;
+        }
+
+        this.todo.name = this.todoName;
+        this.todo.estimate = this.todoEstimate;
+
+        this.disableEditor();
+    }
+};
+</script>
