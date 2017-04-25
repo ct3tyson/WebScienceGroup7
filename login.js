@@ -30,7 +30,7 @@ $("#submit").click(function() {
 					}
 				});
 				//redirect to different page
-				window.location.href = "loggedin.html";
+				window.location.href = "home.html";
 			}
 		});
 		
