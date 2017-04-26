@@ -24,13 +24,16 @@
     <!-- Custom Fonts -->
     <link href="font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
     <link href="http://fonts.googleapis.com/css?family=Lato:300,400,700,300italic,400italic,700italic" rel="stylesheet" type="text/css">
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.5/angular.min.js"></script>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
-    <script src="createDebate.js"> </script>
+
+    
+    <script src="socket.io/socket.io.js"></script>
 
 
 </head>
 
-<body>
+<body ng-app="app">
 
     <!-- Navigation -->
     <nav class="navbar navbar-default navbar-fixed-top topnav" role="navigation">
@@ -50,13 +53,13 @@
             <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                 <ul class="nav navbar-nav navbar-right">
                     <li>
-                        
+                         <a href="signup.html">My Profile</a>
                     </li>
                     <li>
-                        <a href="signup.html">Sign-Up</a>
+                        <a href="CreateDebate.html">Create Debate</a>
                     </li>
                     <li>
-                        <a href="login.html">Login</a>
+                        <a href="http://localhost:3000/logout"> Logout</a>
                     </li>
                     <li>
                         <a href="about.html">About Us</a>
@@ -83,9 +86,9 @@
  
 
 
-<div class="container">
+<div class="container" ng-controller="debateController">
     <div class="row">
-        
+        <p id="error"></p>
         <div class="col-md-4">
             <form>
             <div id="contact-form" class="form-container" data-form-container>
@@ -97,39 +100,41 @@
             <div class="input-container">
                 <div class="row">
                     <span class="req-input" >
-                        <span class="input-status" data-toggle="tooltip" data-placement="top" title="Input Your First and Last Name."> </span>
-                        <input type="text" data-min-length="8" placeholder="Debate Topic">
+                        <span class="input-status" data-toggle="tooltip" data-placement="top" title="Debate topic"> </span>
+                        <input type="text" name="topic" id="debateTopic" placeholder="Debate Topic">
                     </span>
                 </div>
-                <div class="row">
-                    <span class="req-input">
-                        <span class="input-status" data-toggle="tooltip" data-placement="top" title="Please Input Your Email."> </span>
-                        <input type="email" placeholder="Something else?">
-                    </span>
-                </div>
+            
                 <div class="row">
                     <span class="req-input message-box">
                         <span class="input-status" data-toggle="tooltip" data-placement="top" title="Please Include a Debate."> </span>
-                        <textarea type="textarea" data-min-length="10" placeholder="What's your debate? If you cant think of anything... So about chicken tenders and chicken nuggets..."></textarea>
+                        <textarea type="textarea" name="debateInfo" id="newDebate"  data-min-length="10" rows="5" placeholder="What's your debate? If you cant think of anything... So about chicken tenders and chicken nuggets..."></textarea>
                 </div>
                 <div class="row submit-row">
-                    <button type="button" class="btn btn-block submit-form"><b>Create</b></button>
+                    <button type="button" class="btn btn-block submit-form" name="addDebate" id="createDebate"  ng-click="addDebate()">Submit </button>
                 </div>
             </div>
             </div>
             </form>
         </div>
-       
-    
+        <ul ng-repeat="item in items">
+          <li> 
+            <span> {{item.topic}} </span>
+        </li>
+      </ul>
+      
     </div>
 </div>
 
 
+ <script src="js/jquery.js"></script>
 
+    <!-- Bootstrap Core JavaScript -->
+    <script src="js/bootstrap.min.js"></script>
 
-<button type="submit" class="btn btn-success" ng-click="create()" id="submit" value="Submit">Create</button>
-
-
+    
+    <script src="js/createDebate.js"></script>
+<script src="js/createDebate2.js"></script>
 
 </body>
 
