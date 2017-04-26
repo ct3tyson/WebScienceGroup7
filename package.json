@@ -1,0 +1,30 @@
+{
+  "name": "bktlstr",
+  "version": "1.0.0",
+  "description": "Web Science Project",
+  "main": "bktlstr.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/lhqi/bucketlistr.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/lhqi/bucketlistr/issues"
+  },
+  "homepage": "https://github.com/lhqi/bucketlistr#readme",
+  "dependencies": {
+    "body-parser": "^1.15.0",
+    "cookie-parser": "^1.4.1",
+    "crypto": "0.0.3",
+    "express": "^4.13.4",
+    "fs": "0.0.2",
+    "http": "0.0.0",
+    "path": "^0.12.7",
+    "randomstring": "^1.1.4",
+    "socket.io": "^1.4.5"
+  }
+}
