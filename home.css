@@ -1,0 +1,86 @@
+html {
+    min-height: 100%;
+    position: relative;
+}
+
+body {
+    margin-bottom: 40px;
+    background-color: #FFCCAA;
+    background-size: 100%;
+}
+
+footer {
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    height: 40px;
+    width: 100%;
+    background-color: black;
+    text-align: center;
+    opacity: 0.9;
+    padding-top: 10px;
+    font-size: 16px;
+}
+
+.navbar-brand img {
+    margin-right: 5px;
+}
+
+.vertical-center {
+    display: table-cell;
+    float: none;
+    vertical-align: middle;
+    margin-top: -5px;
+}
+
+.navbar-brand {
+    font-size: 18px;
+    margin-top: -8px;
+    margin-bottom: -3px;
+    font-family: "Comic Sans MS", cursive, sans-serif;
+}
+
+.navbar-brand h4 {
+    color: #006bb3;
+}
+
+.navbar {
+    opacity: 0.9;
+    font-size: 18px;
+}
+
+.btn {
+    display: inline-block;;
+}
+
+.jumbotron {
+    opacity: 0.95;
+    background-color: #FFCCAA;
+}
+
+#formStyle {
+    border-radius: 10px;
+    padding: 7px;
+    background-color: white;
+    opacity: 0.97;
+}
+
+#listBlock {
+    border-radius: 10px;
+    padding: 7px;
+    background-color: white;
+    opacity: 0.97;
+}
+
+#profileImage {
+    margin-top: 10px;
+    width: 80px;
+    height: 80px;
+    border-radius: 150px;
+    -webkit-border-radius: 150px;
+    -moz-border-radius: 150px;
+}
+
+.errorMargin {
+    margin-top: 72px;
+}
