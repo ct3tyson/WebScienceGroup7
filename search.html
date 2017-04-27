@@ -2,27 +2,30 @@
 <head>
 	<title>Search</title>
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+	<link href="css/search.css" rel="stylesheet">
 	<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.min.js"></script>
 </head>
 <body ng-app="myAPP" ng-controller="myCtrl">
-	<nav class="navbar navbar-inverse">
-	  	<div class="container-fluid">
-	    	<div class="navbar-header">
-	      		<button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
-	        		<span class="icon-bar"></span>
-	        		<span class="icon-bar"></span>
-	        		<span class="icon-bar"></span>
-	      		</button>
-	    	</div>
-	    	<div class="collapse navbar-collapse" id="myNavbar">
-	    		<ul class="nav navbar-nav">
-	        		<li class="active"><a href="#">Home</a></li>
-	        		<li><a href="/twitter" id="buttonTwitter">Profile</a></li>
-	        		<li><a href="/download" id="buttonDownload">Debate!</a></li>
-	      		</ul>
-	    	</div>
-	 	 </div>
-	</nav>
+	 <nav class="navbar navbar-inverse">
+    <div class="container-fluid">
+      <div class="navbar-header">
+        <div class="navbar-brand">
+         
+         
+        </div>
+      </div>
+      <ul class="nav navbar-nav">
+        <li class="active">
+          <a href="index.html">Home</a>
+        </li>
+        <li></li>
+      </ul>
+      <ul class="nav navbar-nav navbar-right">
+        <li><a href="signup.html" ng-show="!isUserLoggedIn"><span class="glyphicon glyphicon-user"></span> Sign Up</a></li>
+        <li><a href="login.html" ng-show="!isUserLoggedIn" ><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
+      </ul>
+    </div>
+  </nav>
 
 	<h1 style="text-align:center">Search Results for</h1>
 	<h1 style="text-align:center" ng-bind="searchInput"></h1>
@@ -31,34 +34,14 @@
 	</div>
 
 	<div id="resultsRet" class="col-md-8 text-center">
-		<ul id="resultsUL">
+		<ol id="resultsUL">
 			<li ng-repeat="result in results"> {{result}} </li>
-		</ul>
+		</ol>
     </div>
 
 	<script src="http://code.jquery.com/jquery-1.11.1.js"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/1.7.3/socket.io.min.js"></script>
 	<script>
-										//data  //results
-		/*function crtArry(index1, index2, arry, arry2) {
-			var data = arry;
-			$scope.results = arry2;
-			var i=index1;
-			var j=index2;
-			z = data.text.length;
-			if(i<arry.length) {
-				if(j<arry[i].length) {
-					$scope.results.push(data.text[i][j]["topic"]);
-					crtArry(index+1,MongoDBInfo,threads,search);
-				}
-				else {
-
-				}
-			}
-			else {
-				ngWrite(){};
-			}
-		}*/
 		var app = angular.module("myAPP", []);
 
 		app.controller("myCtrl", ['$scope', '$http', function($scope, $http) {
@@ -87,6 +70,7 @@
 				if(updater.length==totalLen) {
 					$scope.$apply(function(){
 						for(i=0;i<totalLen;i++) {
+							console.log(updater[i]);
 							$scope.results.push(updater[i]);
 						}
 					});
