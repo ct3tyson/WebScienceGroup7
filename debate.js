@@ -10,7 +10,7 @@ var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 var crypto = require('crypto');
 var randomstring = require("randomstring");
-
+var db1;
 //database modules
 var Db = require('mongodb').Db,
     MongoClient = require('mongodb').MongoClient,
@@ -25,7 +25,11 @@ var Db = require('mongodb').Db,
 	
 //mongodb bktlstr db url	
 var url = 'mongodb://localhost:27017/debate';	
-
+MongoClient.connect(url, function(err, db) {
+  assert.equal(null, err);
+  console.log("Connected successfully to server");
+  db1 = db;
+});
 
 //cookies and body parser implementation
 app.use(cookieParser());
@@ -41,14 +45,16 @@ app.use(express.static(path.join(__dirname, 'public')));
 // server route handler
 app.get('/', function(req, res){
   res.sendFile(__dirname + '/home.html');
+});
 
+app.get('/search', function(req,res) {
+ res.sendFile(__dirname + '/public/search.html');
 });
 
 //get page for getting user logged in via cookies
 app.get('/user', function(req,res) {
 	res.send(req.cookies.user);
 });
-
 
 //post request for getting a user logged in
 app.post('/login',function(req,res){
@@ -63,6 +69,41 @@ app.get('/logout', function(req,res) {
 	res.clearCookie('user');
 	res.writeHead(307, {'Location':'/home.html'});
 	res.end();
+});
+
+function readyPrinter(index, arry, arry2, search) {
+	var MongoDBInfo = arry;
+	var threads = arry2;
+	var i = index;
+	if(i<MongoDBInfo.length) {
+		var user = MongoDBInfo[i].userName;
+		db1.collection(user).createIndex({topic: "text"});
+		var test = db1.collection(user).find({$text: {$search: search}}).toArray(function(err, docs) {
+			threads.push(docs)
+			readyPrinter(index+1,MongoDBInfo,threads,search);
+		});
+	}
+	else {
+		io.emit("result", {text:threads});
+	}
+}
+//used to find documents in database
+var findDocuments = function(search, arry) {
+	var MongoDBInfo = arry;
+	var threads = [];
+	readyPrinter(0, MongoDBInfo, threads, search);
+};
+
+//When I get my query data this is what I do
+app.get('/query', function(req, res) {
+	var search = req.query.searchInput;
+	var MongoDBInfo = [];
+	var i=0;
+	var collection = db1.collection('users')
+	collection.find().toArray(function(err, docs) {
+		MongoDBInfo = docs;
+		findDocuments(search,MongoDBInfo);
+	});
 });
 
 //mongodb find user function
