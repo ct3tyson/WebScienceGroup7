@@ -1,0 +1,122 @@
+<html>
+<head>
+	<title>Search</title>
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+	<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.min.js"></script>
+</head>
+<body ng-app="myAPP" ng-controller="myCtrl">
+	<nav class="navbar navbar-inverse">
+	  	<div class="container-fluid">
+	    	<div class="navbar-header">
+	      		<button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+	        		<span class="icon-bar"></span>
+	        		<span class="icon-bar"></span>
+	        		<span class="icon-bar"></span>
+	      		</button>
+	    	</div>
+	    	<div class="collapse navbar-collapse" id="myNavbar">
+	    		<ul class="nav navbar-nav">
+	        		<li class="active"><a href="#">Home</a></li>
+	        		<li><a href="/twitter" id="buttonTwitter">Profile</a></li>
+	        		<li><a href="/download" id="buttonDownload">Debate!</a></li>
+	      		</ul>
+	    	</div>
+	 	 </div>
+	</nav>
+
+	<h1 style="text-align:center">Search Results for</h1>
+	<h1 style="text-align:center" ng-bind="searchInput"></h1>
+	<div id="searchDiv" class="col-md-4 text-center">
+		<form id="searchForm">Debate Topic<input type="text" ng-model="searchInput" name="searchTopicInput" value="Debate Topic"> <button type="button" ng-click="search()" class="btn btn-primary">Search!</button> <button type="button" ng-click="reset()" class="btn btn-primary">Reset Search</button></form>
+	</div>
+
+	<div id="resultsRet" class="col-md-8 text-center">
+		<ul id="resultsUL">
+			<li ng-repeat="result in results"> {{result}} </li>
+		</ul>
+    </div>
+
+	<script src="http://code.jquery.com/jquery-1.11.1.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/1.7.3/socket.io.min.js"></script>
+	<script>
+										//data  //results
+		/*function crtArry(index1, index2, arry, arry2) {
+			var data = arry;
+			$scope.results = arry2;
+			var i=index1;
+			var j=index2;
+			z = data.text.length;
+			if(i<arry.length) {
+				if(j<arry[i].length) {
+					$scope.results.push(data.text[i][j]["topic"]);
+					crtArry(index+1,MongoDBInfo,threads,search);
+				}
+				else {
+
+				}
+			}
+			else {
+				ngWrite(){};
+			}
+		}*/
+		var app = angular.module("myAPP", []);
+
+		app.controller("myCtrl", ['$scope', '$http', function($scope, $http) {
+			var socket = io.connect('http://localhost:3000');
+			//Holds my scope.tweets which I then will push to the html when done
+			$scope.results = [];
+			var updater = [];
+			var i=0;
+			var j=0;
+			var z=0;
+			socket.on("result", function(data) {
+				updater = [];
+				z = data.text.length;
+				var totalLen = 0;
+				for(i=0;i<z;i++) {
+					for(j=0;j<data.text[i].length;j++) {
+						totalLen++;
+						//$scope.results.push(data.text[i][j]["topic"]);
+						//console.log($scope.results[i+j]);
+						updater.push(data.text[i][j]["topic"]);
+					}
+				}
+				//Had to use apply because it wasn't updating at first
+				console.log(updater.length);
+				console.log(totalLen);
+				if(updater.length==totalLen) {
+					$scope.$apply(function(){
+						for(i=0;i<totalLen;i++) {
+							$scope.results.push(updater[i]);
+						}
+						$scope.results.push(updater[totalLen-1]);
+					});
+				}
+					/*for(i;i<z;i++) {
+						$scope.results.push(data.text[i]["topic"]);
+						console.log($scope.results[i]);
+					}*/
+			});
+
+
+			//I send this to my node server with the right information
+			$scope.search = function() {
+				$http.get("/query", {
+					params: {
+						searchInput: $scope.searchInput,
+					}
+				}).then(function(response){
+					console.log("Testing2\n");
+				}).then(function(error){
+					console.log("Cannot connect to api");
+					throw error;
+				})
+			};
+			$scope.reset = function() {
+				location.reload();
+			}
+		}]);
+
+	</script>
+</body>
+</html>
