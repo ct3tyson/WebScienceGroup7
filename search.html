@@ -35,7 +35,7 @@
 
 	<div id="resultsRet" class="col-md-8 text-center">
 		<ol id="resultsUL">
-			<li ng-repeat="result in results"> {{result}} </li>
+			<li ng-repeat="result in results"> Topic: {{result.topic}} <br> Debate: {{result.debate}} <br> Creator: {{result.creator}} </li>
 		</ol>
     </div>
 
@@ -47,7 +47,15 @@
 		app.controller("myCtrl", ['$scope', '$http', function($scope, $http) {
 			var socket = io.connect('http://localhost:3000');
 			//Holds my scope.tweets which I then will push to the html when done
-			$scope.results = [];
+			$scope.results = [/*{
+				 	"topic": "placeholder",
+				 	"debate": "placeholder",
+				 	"creator": "placeholder"
+				},{
+				 	"topic": "placeholder1",
+				 	"debate": "placeholder1",
+				 	"creator": "placeholder1"
+				}*/];
 			var updater = [];
 			var i=0;
 			var j=0;
@@ -61,7 +69,12 @@
 						totalLen++;
 						//$scope.results.push(data.text[i][j]["topic"]);
 						//console.log($scope.results[i+j]);
-						updater.push(data.text[i][j]["topic"]);
+						updater.push({
+						 	"topic": data.text[i][j]["topic"],
+						 	"debate": data.text[i][j]["debate"],
+						 	"creator": data.text[i][j]["user"]
+						});
+						//updater.push(data.text[i][j]["topic"]);
 					}
 				}
 				//Had to use apply because it wasn't updating at first
@@ -70,9 +83,11 @@
 				if(updater.length==totalLen) {
 					$scope.$apply(function(){
 						for(i=0;i<totalLen;i++) {
+							console.log(updater);
 							console.log(updater[i]);
 							$scope.results.push(updater[i]);
 						}
+						console.log($scope.results);
 					});
 				}
 					/*for(i;i<z;i++) {
